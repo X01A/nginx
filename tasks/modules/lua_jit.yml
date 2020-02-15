@@ -29,5 +29,5 @@
     create: yes
     line: '/usr/local/luajit/lib'
 
-- name: Reload ld config
-  command: ldconfig # noqa 305
+- name: Reload ld config # noqa 301
+  command: ldconfig

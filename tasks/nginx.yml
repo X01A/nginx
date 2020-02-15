@@ -35,7 +35,7 @@
     basedir: "{{ src_location }}/nginx-{{ nginx_version }}"
     strip: 1
 
-- name: Configure nginx # noqa 305
+- name: Configure nginx # noqa 305 301
   shell:
     cmd: "./configure {{ nginx_configure_arg }}"
     chdir: "{{ src_location }}/nginx-{{ nginx_version }}"

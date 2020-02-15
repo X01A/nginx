@@ -9,17 +9,20 @@
     path: "{{ nginx_install }}/certs/selfsign"
     state: directory
 
-- name: Create private key
-  shell:
-    cmd: openssl ecparam -genkey -name prime256v1 -out private.pem
-    chdir: "{{ nginx_install }}/certs/selfsign"
+- name: Create tls private key
+  openssl_privatekey:
+    path: "{{ nginx_install }}/certs/selfsign/private.pem"
+    curve: prime256v1
 
-- name: Create cert csr
-  shell:
-    cmd: openssl req -new -sha256 -key private.pem -out csr.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
-    chdir: "{{ nginx_install }}/certs/selfsign"
+- name: Create tls cert csr
+  openssl_csr:
+    path: "{{ nginx_install }}/certs/selfsign/csr.pem"
+    privatekey_path: "{{ nginx_install }}/certs/selfsign/private.pem"
+    common_name: example.com
 
-- name: Self sign key
-  shell:
-    cmd: openssl x509 -req -days 3650 -in csr.pem -signkey private.pem -out public.pem
-    chdir: "{{ nginx_install }}/certs/selfsign"
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+    path: "{{ nginx_install }}/certs/selfsign/public.pem"
+    privatekey_path: "{{ nginx_install }}/certs/selfsign/private.pem"
+    csr_path: "{{ nginx_install }}/certs/selfsign/csr.pem"
+    provider: selfsigned
