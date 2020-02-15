@@ -12,7 +12,7 @@
 - name: Create tls private key
   openssl_privatekey:
     path: "{{ nginx_install }}/certs/selfsign/private.pem"
-    curve: prime256v1
+    curve: secp256k1
 
 - name: Create tls cert csr
   openssl_csr:
