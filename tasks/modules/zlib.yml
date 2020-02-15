@@ -4,6 +4,7 @@
     repo: https://github.com/cloudflare/zlib.git
     dest: "{{ src_location }}/zlib"
     force: yes
+    version: af9ef2e94cb9ffebc8dc6cc6d856e494880d869b
 
 - name: Zlib distclean
   make:

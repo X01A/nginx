@@ -1,10 +1,12 @@
 ---
 - name: Clone ngx_brotli repo
   git:
-    repo: https://github.com/eustas/ngx_brotli.git
+    repo: https://github.com/google/ngx_brotli.git
     dest: "{{ src_location }}/brotli"
     track_submodules: yes
     force: yes
+    # https://github.com/google/ngx_brotli/commit/e505dce68acc190cc5a1e780a3b0275e39f160ca
+    version: e505dce68acc190cc5a1e780a3b0275e39f160ca
 
 - name: Set ngx_brotli nginx compile args
   set_fact:

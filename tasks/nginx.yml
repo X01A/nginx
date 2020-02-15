@@ -70,4 +70,3 @@
     dest: /etc/systemd/system/nginx.service
     mode: 0755
   notify: start nginx
-

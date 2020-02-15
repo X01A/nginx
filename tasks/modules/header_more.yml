@@ -4,6 +4,7 @@
     repo: https://github.com/openresty/headers-more-nginx-module.git
     dest: "{{ src_location }}/header_more"
     force: yes
+    version: 743a4bb1a253325d17a4f4ce8ee61ea0d8e0cc19
 
 - name: Set header_more nginx compile args
   set_fact:

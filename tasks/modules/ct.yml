@@ -4,6 +4,8 @@
     repo: https://github.com/grahamedgecombe/nginx-ct.git
     dest: "{{ src_location }}/ct"
     force: yes
+    # https://github.com/grahamedgecombe/nginx-ct/commit/93e9884764b77300236fd878ae284f2a40314f38
+    version: 93e9884764b77300236fd878ae284f2a40314f38
 
 - name: Set ct nginx compile args
   set_fact:

@@ -28,4 +28,4 @@
     line: '/usr/local/luajit/lib'
 
 - name: Reload ld config
-  shell: ldconfig
+  command: ldconfig
