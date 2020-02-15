@@ -1,20 +1,20 @@
 ---
 - name: Get PCRE src tarball
   get_url:
-    url: "https://ftp.pcre.org/pub/pcre/pcre-{{pcre_version}}.tar.gz"
+    url: "https://ftp.pcre.org/pub/pcre/pcre-{{ pcre_version }}.tar.gz"
     dest: "{{src_location}}/pcre.tgz"
 
 - name: Extract PCRE src tarball
   unarchive:
-    src: "{{src_location}}/pcre.tgz"
-    dest: "{{src_location}}"
+    src: "{{ src_location }}/pcre.tgz"
+    dest: "{{ src_location }}"
     remote_src: yes
 
 - name: Remove PCRE src tarball
   file:
-    path: "{{src_location}}/pcre.tgz"
+    path: "{{ src_location }}/pcre.tgz"
     state: absent
 
 - name: Set PCRE nginx compile args
   set_fact:
-    nginx_configure_arg: "{{nginx_configure_arg}} --with-pcre={{src_location}}/pcre-{{pcre_version}} --with-pcre-jit"
+    nginx_configure_arg: "{{ nginx_configure_arg }} --with-pcre={{ src_location }}/pcre-{{ pcre_version }} --with-pcre-jit"

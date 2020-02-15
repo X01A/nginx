@@ -2,9 +2,9 @@
 - name: Clone nginx ct repo
   git:
     repo: https://github.com/grahamedgecombe/nginx-ct.git
-    dest: "{{src_location}}/ct"
+    dest: "{{ src_location }}/ct"
     force: yes
 
 - name: Set ct nginx compile args
   set_fact:
-    nginx_configure_arg: "{{nginx_configure_arg}} --add-module={{src_location}}/ct"
+    nginx_configure_arg: "{{ nginx_configure_arg }} --add-module={{ src_location }}/ct"

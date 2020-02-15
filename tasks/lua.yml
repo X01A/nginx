@@ -1,25 +1,25 @@
 ---
 - name: Make lua dir
   file:
-    path: "{{nginx_install}}/lua"
+    path: "{{ nginx_install }}/lua"
     state: directory
 
 - name: Clone lua-resty-core repo
   git:
     repo: https://github.com/openresty/lua-resty-core.git
-    dest: "{{src_location}}/lua-resty-core"
+    dest: "{{ src_location }}/lua-resty-core"
 
 - name: Install lua-resty-core
   shell:
-    cmd: rsync -avh lua-resty-core/lib/ {{nginx_install}}/lua
-    chdir: "{{src_location}}"
+    cmd: rsync -avh lua-resty-core/lib/ {{ nginx_install }}/lua
+    chdir: "{{ src_location }}"
 
 - name: Clone lua-resty-lrucache repo
   git:
     repo: https://github.com/openresty/lua-resty-lrucache.git
-    dest: "{{src_location}}/lua-resty-lrucache"
+    dest: "{{ src_location }}/lua-resty-lrucache"
 
 - name: Install lua-resty-lrucache
   shell:
-    cmd: rsync -avh lua-resty-lrucache/lib/ {{nginx_install}}/lua
-    chdir: "{{src_location}}"
+    cmd: rsync -avh lua-resty-lrucache/lib/ {{ nginx_install }}/lua
+    chdir: "{{ src_location }}"

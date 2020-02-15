@@ -2,9 +2,9 @@
 - name: Clone dev_kit repo
   git:
     repo: https://github.com/simpl/ngx_devel_kit.git
-    dest: "{{src_location}}/dev_kit"
+    dest: "{{ src_location }}/dev_kit"
     force: yes
 
 - name: Set dev_kit nginx compile args
   set_fact:
-    nginx_configure_arg: "{{nginx_configure_arg}} --add-module={{src_location}}/dev_kit"
+    nginx_configure_arg: "{{ nginx_configure_arg }} --add-module={{ src_location }}/dev_kit"

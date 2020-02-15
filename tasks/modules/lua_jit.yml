@@ -1,24 +1,24 @@
 ---
 - name: Get lua_jit src tarball
   get_url:
-    url: "https://luajit.org/download/LuaJIT-{{lua_jit_version}}.tar.gz"
-    dest: "{{src_location}}/lua_jit.tgz"
+    url: "https://luajit.org/download/LuaJIT-{{ lua_jit_version }}.tar.gz"
+    dest: "{{ src_location }}/lua_jit.tgz"
 
 - name: Extract lua_jit src tarball
   unarchive:
-    src: "{{src_location}}/lua_jit.tgz"
-    dest: "{{src_location}}"
+    src: "{{ src_location }}/lua_jit.tgz"
+    dest: "{{ src_location }}"
     remote_src: yes
 
 - name: Remove lua_jit src tarball
   file:
-    path: "{{src_location}}/lua_jit.tgz"
+    path: "{{ src_location }}/lua_jit.tgz"
     state: absent
 
 - name: Compile lua_jit
   shell:
-    cmd: "make install PREFIX={{lua_jit_install}}"
-    chdir: "{{src_location}}/LuaJIT-{{lua_jit_version}}"
+    cmd: "make install PREFIX={{ lua_jit_install }}"
+    chdir: "{{ src_location }}/LuaJIT-{{ lua_jit_version }}"
 
 - name: Set lua_jit lib to ld config
   lineinfile:

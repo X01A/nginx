@@ -1,25 +1,25 @@
 ---
 - name: Make certs dir
   file:
-    path: "{{nginx_install}}/certs"
+    path: "{{ nginx_install }}/certs"
     state: directory
 
 - name: Make selfsign certs dir
   file:
-    path: "{{nginx_install}}/certs/selfsign"
+    path: "{{ nginx_install }}/certs/selfsign"
     state: directory
 
 - name: Create private key
   shell:
     cmd: openssl ecparam -genkey -name prime256v1 -out private.pem
-    chdir: "{{nginx_install}}/certs/selfsign"
+    chdir: "{{ nginx_install }}/certs/selfsign"
 
 - name: Create cert csr
   shell:
     cmd: openssl req -new -sha256 -key private.pem -out csr.pem -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
-    chdir: "{{nginx_install}}/certs/selfsign"
+    chdir: "{{ nginx_install }}/certs/selfsign"
 
 - name: Self sign key
   shell:
     cmd: openssl x509 -req -days 3650 -in csr.pem -signkey private.pem -out public.pem
-    chdir: "{{nginx_install}}/certs/selfsign"
+    chdir: "{{ nginx_install }}/certs/selfsign"

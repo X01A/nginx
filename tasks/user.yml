@@ -16,4 +16,4 @@
 
 - name: Set user nginx compile args
   set_fact:
-    nginx_configure_arg: "{{nginx_configure_arg}} --user={{ user }} --group={{ group }}"
+    nginx_configure_arg: "{{ nginx_configure_arg }} --user={{ user }} --group={{ group }}"

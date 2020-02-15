@@ -2,9 +2,9 @@
 - name: Clone lua-nginx-module repo
   git:
     repo: https://github.com/openresty/lua-nginx-module.git
-    dest: "{{src_location}}/lua"
+    dest: "{{ src_location }}/lua"
     force: yes
 
 - name: Set lua-nginx-module nginx compile args
   set_fact:
-    nginx_configure_arg: "{{nginx_configure_arg}} --add-module={{src_location}}/lua"
+    nginx_configure_arg: "{{ nginx_configure_arg }} --add-module={{ src_location }}/lua"
