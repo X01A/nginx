@@ -1,11 +1,10 @@
 ---
-- name: Clone ngx_brotli repo
+- name: Clone ngx_brotli repo # noqa 401
   git:
     repo: https://github.com/openssl/openssl.git
     dest: "{{ src_location }}/openssl"
     track_submodules: yes
     force: yes
-    # noqa 401
 
 - name: Set openssl nginx compile args
   set_fact:
