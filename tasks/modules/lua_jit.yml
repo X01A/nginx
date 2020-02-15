@@ -16,8 +16,10 @@
     state: absent
 
 - name: Compile lua_jit
-  shell:
-    cmd: "make install PREFIX={{ lua_jit_install }}"
+  make:
+    target: install
+    params:
+      PREFIX: "{{ lua_jit_install }}"
     chdir: "{{ src_location }}/LuaJIT-{{ lua_jit_version }}"
 
 - name: Set lua_jit lib to ld config
@@ -28,4 +30,4 @@
     line: '/usr/local/luajit/lib'
 
 - name: Reload ld config
-  command: ldconfig
+  command: ldconfig # noqa 305

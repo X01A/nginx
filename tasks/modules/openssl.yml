@@ -5,7 +5,10 @@
     dest: "{{ src_location }}/openssl"
     track_submodules: yes
     force: yes
+    # noqa 401
 
 - name: Set openssl nginx compile args
   set_fact:
-    nginx_configure_arg: "{{ nginx_configure_arg }} --with-openssl={{ src_location }}/openssl --with-openssl-opt='zlib enable-tls1_3 enable-weak-ssl-ciphers enable-ec_nistp_64_gcc_128 -march=native -ljemalloc -Wl,-flto'"
+    nginx_configure_arg: "{{ nginx_configure_arg }}
+      --with-openssl={{ src_location }}/openssl
+      --with-openssl-opt='zlib enable-tls1_3 enable-weak-ssl-ciphers enable-ec_nistp_64_gcc_128 -march=native -ljemalloc -Wl,-flto'"

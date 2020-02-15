@@ -27,14 +27,15 @@
 - name: Get kn007 nginx.patch
   get_url:
     url: https://raw.githubusercontent.com/kn007/patch/master/nginx.patch
-    dest: "{{ src_location }}/nginx-{{nginx_version}}/nginx.patch"
+    dest: "{{ src_location }}/nginx-{{ nginx_version }}/nginx.patch"
 
 - name: Patch nginx
-  shell:
-    cmd: cat nginx.patch | patch -p1
-    chdir: "{{ src_location }}/nginx-{{ nginx_version }}"
+  patch:
+    src: "{{ src_location }}/nginx-{{ nginx_version }}/nginx.patch"
+    basedir: "{{ src_location }}/nginx-{{ nginx_version }}"
+    strip: 1
 
-- name: Configure nginx
+- name: Configure nginx # noqa 305
   shell:
     cmd: "./configure {{ nginx_configure_arg }}"
     chdir: "{{ src_location }}/nginx-{{ nginx_version }}"

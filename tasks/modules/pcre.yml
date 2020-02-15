@@ -2,7 +2,7 @@
 - name: Get PCRE src tarball
   get_url:
     url: "https://ftp.pcre.org/pub/pcre/pcre-{{ pcre_version }}.tar.gz"
-    dest: "{{src_location}}/pcre.tgz"
+    dest: "{{ src_location }}/pcre.tgz"
 
 - name: Extract PCRE src tarball
   unarchive:
