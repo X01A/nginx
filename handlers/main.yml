@@ -1,0 +1,11 @@
+---
+# handlers file for v2ray
+- name: start nginx
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    name: nginx
+  # Docker is not support systemd
+  # http://syste.md ;-(
+  when: (test_mode is not defined) and (start_nginx)

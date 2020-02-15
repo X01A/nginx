@@ -1,0 +1,10 @@
+---
+- name: Clone header_more repo
+  git:
+    repo: https://github.com/openresty/headers-more-nginx-module.git
+    dest: "{{src_location}}/header_more"
+    force: yes
+
+- name: Set header_more nginx compile args
+  set_fact:
+    nginx_configure_arg: "{{nginx_configure_arg}} --add-module={{src_location}}/header_more"

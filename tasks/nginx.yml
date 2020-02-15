@@ -1,0 +1,72 @@
+---
+- name: Remove nginx dir if exsits
+  file:
+    path: "{{src_location}}/nginx-{{nginx_version}}"
+    state: absent
+
+- name: Set nginx install prefix
+  set_fact:
+    nginx_configure_arg: "{{nginx_configure_arg}} --prefix={{nginx_install}}"
+
+- name: Download nginx src tarball
+  get_url:
+    url: "http://nginx.org/download/nginx-{{nginx_version}}.tar.gz"
+    dest: "{{src_location}}/nginx.tgz"
+
+- name: Extract nginx src tarball
+  unarchive:
+    src: "{{src_location}}/nginx.tgz"
+    dest: "{{src_location}}"
+    remote_src: yes
+
+- name: Remove nginx src tarball
+  file:
+    path: "{{src_location}}/nginx.tgz"
+    state: absent
+
+- name: Get kn007 nginx.patch
+  get_url:
+    url: https://raw.githubusercontent.com/kn007/patch/master/nginx.patch
+    dest: "{{src_location}}/nginx-{{nginx_version}}/nginx.patch"
+
+- name: Patch nginx
+  shell:
+    cmd: cat nginx.patch | patch -p1
+    chdir: "{{src_location}}/nginx-{{nginx_version}}"
+
+- name: Configure nginx
+  shell:
+    cmd: "./configure {{nginx_configure_arg}}"
+    chdir: "{{src_location}}/nginx-{{nginx_version}}"
+  environment:
+    LUAJIT_LIB: "{{lua_jit_install}}/lib"
+    LUAJIT_INC: "{{lua_jit_install}}/include/luajit-2.0"
+
+- name: Make nginx
+  shell:
+    cmd: "make -j{{ansible_processor_vcpus}}"
+    chdir: "{{src_location}}/nginx-{{nginx_version}}"
+
+- name: Install nginx
+  shell:
+    cmd: "make install"
+    chdir: "{{src_location}}/nginx-{{nginx_version}}"
+
+- name: Create nginx log dir
+  file:
+    path: /var/log/nginx/
+    state: directory
+
+- name: Link nginx bin to /usr/bin
+  file:
+    src: "{{nginx_install}}/sbin/nginx"
+    dest: "/usr/bin/nginx"
+    state: link
+
+- name: Install nginx service
+  template:
+    src: nginx.service
+    dest: /etc/systemd/system/nginx.service
+    mode: 0755
+  notify: start nginx
+

@@ -1,0 +1,15 @@
+---
+- name: Render nginx.conf
+  template:
+    src: nginx.conf
+    dest: "{{nginx_install}}/conf/nginx.conf"
+
+- name: Make nginx sub configs dir
+  file:
+    path: "{{nginx_install}}/conf/conf/"
+    state: directory
+
+- name: Render default configure
+  template:
+    src: default.conf
+    dest: "{{nginx_install}}/conf/conf/default.conf"

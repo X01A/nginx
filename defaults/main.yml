@@ -1,0 +1,51 @@
+---
+# Nginx Settings
+# Nginx will install into this location
+nginx_install: /usr/local/nginx
+
+# User to run nginx, will create it if not exsit
+user: www
+
+# Group to run nginx, will create it if not exsit
+group: www
+
+# Using Nginx core version
+nginx_version: '1.17.7'
+
+# Extra args for compile nginx
+nginx_configure_arg: --http-client-body-temp-path=/tmp/nginx_client_body
+  --http-proxy-temp-path=/tmp/nginx_proxy
+  --http-fastcgi-temp-path=/tmp/nginx_fastcgi
+  --without-http_ssi_module
+  --without-http_scgi_module
+  --without-http_uwsgi_module
+  --with-http_stub_status_module
+  --with-http_ssl_module
+  --with-http_spdy_module
+  --with-http_v2_module
+  --with-http_v2_hpack_enc
+  --with-http_gzip_static_module
+  --with-http_realip_module
+  --with-libatomic
+  --with-threads
+  --with-file-aio
+  --with-stream
+  --with-stream_realip_module
+  --with-stream_ssl_module
+  --with-stream_ssl_preread_module
+  --with-ld-opt='-Wl,-z,relro -Wl,-z,now -fPIC -ljemalloc -lrt'
+  --with-cc-opt='-m64 -O3 -g -DTCP_FASTOPEN=23 -ffast-math -march=native -flto -fstack-protector-strong -fuse-ld=gold --param=ssp-buffer-size=4 -Wformat -Werror=format-security -fno-strict-aliasing -fPIC -Wdate-time -Wp,-D_FORTIFY_SOURCE=2 -gsplit-dwarf'
+
+# Nginx will start when finish
+start_nginx: no
+
+# Thrid-party settings
+# Modules src file location
+src_location: /usr/local/src
+
+# Pcre download version
+pcre_version: '8.43'
+
+# Lua jit
+lua_jit_version: '2.0.5'
+lua_jit_install: /usr/local/luajit

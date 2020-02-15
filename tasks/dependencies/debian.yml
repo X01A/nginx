@@ -1,0 +1,12 @@
+---
+- name: Install compile required deps
+  apt:
+    pkg:
+    - make
+    - wget
+    - git
+    - build-essential
+    - libatomic-ops-dev
+    - zlib1g-dev
+    - libjemalloc-dev
+    update_cache: yes

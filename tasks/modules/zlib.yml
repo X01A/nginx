@@ -1,0 +1,15 @@
+---
+- name: Clone cloudflare zlib repo
+  git:
+    repo: https://github.com/cloudflare/zlib.git
+    dest: "{{src_location}}/zlib"
+    force: yes
+
+- name: Zlib distclean
+  shell:
+    cmd: make -f Makefile.in distclean
+    chdir: "{{src_location}}/zlib"
+
+- name: Set zlib nginx compile args
+  set_fact:
+    nginx_configure_arg: "{{nginx_configure_arg}} --with-zlib={{src_location}}/zlib"

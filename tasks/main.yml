@@ -1,0 +1,30 @@
+- include: dependencies/{{ ansible_distribution | lower | clean_space }}.yml
+  tags:
+    - install
+    - deps
+
+- include: "{{ item }}"
+  with_fileglob: "modules/*.yml"
+  tags:
+    - install
+    - deps
+
+- include: nginx.yml
+  tags:
+    - install
+
+- include: user.yml
+  tags:
+    - install
+
+- include: lua.yml
+  tags:
+    - install
+
+- include: config.yml
+  tags:
+    - config
+
+- include: cert.yml
+  tags:
+    - config

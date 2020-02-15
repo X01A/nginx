@@ -1,0 +1,19 @@
+---
+- name: Ensure nginx group exists
+  group:
+    name: "{{ group }}"
+    state: present
+
+- name: Ensure nginx user exists
+  user:
+    name: "{{ user }}"
+    groups: "{{ group }}"
+    expires: -1
+    shell: /bin/false
+    state: present
+    create_home: no
+    system: yes
+
+- name: Set user nginx compile args
+  set_fact:
+    nginx_configure_arg: "{{nginx_configure_arg}} --user={{ user }} --group={{ group }}"
