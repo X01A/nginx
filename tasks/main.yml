@@ -1,4 +1,4 @@
-- include: dependencies/{{ ansible_distribution | lower | clean_space }}.yml
+- include: dependencies/{{ ansible_distribution | lower | replace(' ', '') }}.yml
   tags:
     - install
     - deps
