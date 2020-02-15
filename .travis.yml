@@ -3,9 +3,6 @@ sudo: required
 services:
 - docker
 
-before_script:
-- pip install --upgrade ansible-lint
-
 stages:
   - ansible-lint
   - ansible-run-test
@@ -13,6 +10,7 @@ stages:
 ansible-lint:
   stage: ansible-lint
   script:
+    - sudo pip install --upgrade ansible-lint
     - ansible-lint tests/test.yml
 
 ansible-run-test:
