@@ -7,19 +7,21 @@ stages:
   - ansible-lint
   - ansible-run-test
 
-ansible-lint:
-  stage: ansible-lint
-  script:
-    - sudo pip install --upgrade ansible-lint
-    - ansible-lint tests/test.yml
+jobs:
+  include:
+    - stage: ansible-lint
+      name: "Lint source files"
+      script:
+        - sudo pip install --upgrade ansible-lint
+        - ansible-lint tests/test.yml
 
-ansible-run-test:
-  stage: ansible-run-test
-  script:
-  - export RUN_ARGS="--rm --privileged -v /lib/modules/:/lib/modules/ -v $(pwd):/etc/ansible/roles/nginx/"
-  - export PLAYBOOK="-i /etc/ansible/roles/nginx/tests/inventory /etc/ansible/roles/nginx/tests/test.yml"
+    - stage: ansible-run-test
+      name: "Docker deploy test"
+      script:
+      - export RUN_ARGS="--rm --privileged -v /lib/modules/:/lib/modules/ -v $(pwd):/etc/ansible/roles/nginx/"
+      - export PLAYBOOK="-i /etc/ansible/roles/nginx/tests/inventory /etc/ansible/roles/nginx/tests/test.yml"
 
-  - docker run $RUN_ARGS indexyz/ansible:debian-9 $PLAYBOOK
+      - docker run $RUN_ARGS indexyz/ansible:debian-9 $PLAYBOOK
 
 notifications:
  webhooks: https://galaxy.ansible.com/api/v1/notifications/
