@@ -2,7 +2,6 @@
 Delpoy nginx to server
 
 ## Example Playbook
-----------------
 ```yaml
 - hosts: servers
   roles:
