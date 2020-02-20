@@ -1,11 +1,11 @@
 ---
-  - name: Clone dev_kit repo
+  - name: Clone dav_ext repo
     git:
       repo: https://github.com/arut/nginx-dav-ext-module.git
       dest: "{{ src_location }}/dav_ext"
       force: yes
       version: v3.0.0
 
-  - name: Set dev_kit nginx compile args
+  - name: Set dav_ext nginx compile args
     set_fact:
       nginx_configure_arg: "{{ nginx_configure_arg }} --add-module={{ src_location }}/dav_ext"

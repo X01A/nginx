@@ -1,0 +1,11 @@
+---
+- name: Clone ldap repo
+  git:
+    repo: https://github.com/kvspb/nginx-auth-ldap.git
+    dest: "{{ src_location }}/ldap"
+    force: yes
+    version: e2081531c1eadd0afd9252e538c06f82c60db7f6
+
+- name: Set ldap nginx compile args
+  set_fact:
+    nginx_configure_arg: "{{ nginx_configure_arg }} --add-module={{ src_location }}/ldap"
