@@ -15,6 +15,7 @@
     src: "{{ src_location }}/lua-resty-core/lib/"
     dest: "{{ nginx_install }}/lua"
     archive: yes
+  delegate_to: "{{ inventory_hostname }}"
 
 - name: Clone lua-resty-lrucache repo
   git:
@@ -27,3 +28,4 @@
     src: "{{ src_location }}/lua-resty-lrucache/lib/"
     dest: "{{ nginx_install }}/lua"
     archive: yes
+  delegate_to: "{{ inventory_hostname }}"
