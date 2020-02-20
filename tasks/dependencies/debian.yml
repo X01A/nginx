@@ -9,4 +9,6 @@
     - libatomic-ops-dev
     - zlib1g-dev
     - libjemalloc-dev
+    - libxml2-dev
+    - libxslt-dev
     update_cache: yes

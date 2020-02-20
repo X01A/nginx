@@ -11,17 +11,38 @@
 - name: Download nginx src tarball
   get_url:
     url: "http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz"
-    dest: "{{ src_location }}/nginx.tgz"
+    dest: "{{ src_location }}/nginx-{{ nginx_version }}.tar.gz"
+
+- name: Download nginx gpg asc
+  get_url:
+    url: "http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz.asc"
+    dest: "{{ src_location }}/nginx-{{ nginx_version }}.tar.gz.asc"
+
+# BTW, ansible is no gpg verify module
+- name: Import nginx gpg key # noqa 305 301
+  command: gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 520A9993A1C052F8
+
+- name: Verify nginx tarball # noqa 305 301
+  shell:
+    cmd: gpg --trusted-key 520A9993A1C052F8 --verify
+      nginx-{{ nginx_version }}.tar.gz.asc
+      nginx-{{ nginx_version }}.tar.gz
+    chdir: "{{ src_location }}"
 
 - name: Extract nginx src tarball
   unarchive:
-    src: "{{ src_location }}/nginx.tgz"
+    src: "{{ src_location }}/nginx-{{ nginx_version }}.tar.gz"
     dest: "{{ src_location }}"
     remote_src: yes
 
 - name: Remove nginx src tarball
   file:
-    path: "{{ src_location }}/nginx.tgz"
+    path: "{{ src_location }}/nginx-{{ nginx_version }}.tar.gz"
+    state: absent
+
+- name: Remove nginx gpg asc
+  file:
+    path: "{{ src_location }}/nginx-{{ nginx_version }}.tar.gz.asc"
     state: absent
 
 - name: Get kn007 nginx.patch
@@ -34,6 +55,7 @@
     src: "{{ src_location }}/nginx-{{ nginx_version }}/nginx.patch"
     basedir: "{{ src_location }}/nginx-{{ nginx_version }}"
     strip: 1
+    remote_src: yes
 
 - name: Configure nginx # noqa 305 301
   shell:
