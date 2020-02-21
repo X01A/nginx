@@ -11,6 +11,7 @@ galaxy_info:
     - name: Debian
       versions:
       - stretch
+    - name: ArchLinux
 
   galaxy_tags:
   - nginx

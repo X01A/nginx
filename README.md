@@ -9,5 +9,9 @@ Delpoy nginx to server
       start_nginx: yes
 ```
 
+### Support System
+- Debian 9
+- ArchLinux
+
 ### License
 MIT
