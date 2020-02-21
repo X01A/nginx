@@ -3,25 +3,22 @@ sudo: required
 services:
 - docker
 
-stages:
-  - ansible-lint
-  - ansible-run-test
-
 jobs:
   include:
-    - stage: ansible-lint
+    - stage: Lint
       name: "Lint source files"
       script:
         - sudo pip install --upgrade ansible-lint
         - ansible-lint tests/test.yml
 
-    - stage: ansible-run-test
-      name: "Docker deploy test"
+    - stage: Test
+      name: "Debian 9 Test"
       script:
-      - export RUN_ARGS="--rm --privileged -v /lib/modules/:/lib/modules/ -v $(pwd):/etc/ansible/roles/nginx/"
-      - export PLAYBOOK="-i /etc/ansible/roles/nginx/tests/inventory /etc/ansible/roles/nginx/tests/test.yml"
+      - bash tests/run.sh debian-9
 
-      - docker run $RUN_ARGS indexyz/ansible:debian-9 $PLAYBOOK
+    - name: "ArchLinux Test"
+      script:
+      - bash tests/run.sh archlinux
 
 notifications:
  webhooks: https://galaxy.ansible.com/api/v1/notifications/

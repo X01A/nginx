@@ -1,0 +1,17 @@
+---
+- name: Install compile required deps
+  pacman:
+    name:
+      - wget
+      - git
+      - make
+      - gcc
+      - rsync
+      - libatomic_ops
+      - zlib
+      - jemalloc
+      - libxml2
+      - libxslt
+      - libldap
+      - patch
+    state: present
