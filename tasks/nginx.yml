@@ -20,7 +20,15 @@
 
 # BTW, ansible is no gpg verify module
 - name: Import nginx gpg key # noqa 305 301
-  command: gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 520A9993A1C052F8
+  command: gpg --keyserver {{ item }} --recv-key 520A9993A1C052F8
+  register: nginx_gpg_verify
+  loop:
+    - hkp://keyserver.ubuntu.com:80
+    - ha.pool.sks-keyservers.net
+    - hkp://p80.pool.sks-keyservers.net:80
+    - pgp.mit.edu
+  when: nginx_gpg_verify is not defined or nginx_gpg_verify is failure
+  failed_when: nginx_gpg_verify is failure
 
 - name: Verify nginx tarball # noqa 305 301
   shell:
