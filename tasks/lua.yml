@@ -7,25 +7,17 @@
 - name: Clone lua-resty-core repo
   git:
     repo: https://github.com/openresty/lua-resty-core.git
-    dest: "{{ src_location }}/lua-resty-core"
+    dest: "{{ nginx_install }}/lua/lua-resty-core"
     version: v0.1.18rc1
-
-- name: Install lua-resty-core
-  synchronize:
-    src: "{{ src_location }}/lua-resty-core/lib/"
-    dest: "{{ nginx_install }}/lua"
-    archive: yes
-  delegate_to: "{{ inventory_hostname }}"
 
 - name: Clone lua-resty-lrucache repo
   git:
     repo: https://github.com/openresty/lua-resty-lrucache.git
-    dest: "{{ src_location }}/lua-resty-lrucache"
+    dest: "{{ nginx_install }}/lua/lua-resty-lrucache"
     version: v0.10rc1
 
-- name: Install lua-resty-lrucache
-  synchronize:
-    src: "{{ src_location }}/lua-resty-lrucache/lib/"
-    dest: "{{ nginx_install }}/lua"
-    archive: yes
-  delegate_to: "{{ inventory_hostname }}"
+- name: Clone nginx-lua-prometheus repo
+  git:
+    repo: https://github.com/knyar/nginx-lua-prometheus.git
+    dest: "{{ nginx_install }}/lua/nginx-lua-prometheus"
+    version: 1e13e22cd81bf55d222688bf5f9d26c441c0bb47
