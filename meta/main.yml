@@ -12,6 +12,9 @@ galaxy_info:
       versions:
       - stretch
     - name: ArchLinux
+    - name: EL
+      versions:
+        - 8
 
   galaxy_tags:
   - nginx

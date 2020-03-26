@@ -5,7 +5,6 @@
     - make
     - wget
     - git
-    - rsync
     - build-essential
     - libatomic-ops-dev
     - zlib1g-dev

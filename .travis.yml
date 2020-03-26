@@ -20,5 +20,10 @@ jobs:
       script:
       - bash tests/run.sh archlinux
 
+    - name: "CentOS 8 Test"
+      script:
+      - bash tests/run.sh centos-8
+
+
 notifications:
  webhooks: https://galaxy.ansible.com/api/v1/notifications/

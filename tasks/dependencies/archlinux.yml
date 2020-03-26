@@ -6,7 +6,6 @@
       - git
       - make
       - gcc
-      - rsync
       - libatomic_ops
       - zlib
       - jemalloc

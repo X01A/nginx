@@ -1,0 +1,41 @@
+---
+- name: Import remi GPG key
+  rpm_key:
+    key: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
+    state: present
+
+- name: Install remi repo
+  yum:
+    name: "http://rpms.remirepo.net/enterprise/remi-release-{{ ansible_distribution_major_version }}.rpm"
+    state: present
+
+- name: Install dnf-command(config-manager)
+  when: ansible_distribution_major_version == '8'
+  yum:
+    name: dnf-command(config-manager)
+    state: installed
+    update_cache: yes
+
+- name: Enable PowerTools repo # noqa 305 301
+  when: ansible_distribution_major_version == '8'
+  command: dnf config-manager --set-enabled PowerTools
+
+- name: Install centos packages
+  yum:
+    name:
+    - git
+    - wget
+    - make
+    - gcc
+    - gcc-c++
+    - patch
+    - diffutils
+    - file
+    - libatomic_ops-devel
+    - zlib-devel
+    - jemalloc-devel
+    - libxml2-devel
+    - libxslt-devel
+    - openldap-devel
+    state: installed
+    update_cache: yes
