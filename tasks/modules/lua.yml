@@ -4,7 +4,7 @@
     repo: https://github.com/openresty/lua-nginx-module.git
     dest: "{{ src_location }}/lua"
     force: yes
-    version: v0.10.16rc3
+    version: v0.10.16rc5
 
 - name: Set lua-nginx-module nginx compile args
   set_fact:
