@@ -71,7 +71,7 @@
     chdir: "{{ src_location }}/nginx-{{ nginx_version }}"
   environment:
     LUAJIT_LIB: "{{ lua_jit_install }}/lib"
-    LUAJIT_INC: "{{ lua_jit_install }}/include/luajit-2.0"
+    LUAJIT_INC: "{{ lua_jit_install }}/include/luajit-2.1"
 
 - name: Make nginx
   make:
