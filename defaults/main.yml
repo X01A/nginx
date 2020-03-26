@@ -10,7 +10,7 @@ user: www
 group: www
 
 # Using Nginx core version
-nginx_version: '1.17.8'
+nginx_version: '1.17.9'
 
 # Extra args for compile nginx
 nginx_configure_arg: --http-client-body-temp-path=/tmp/nginx_client_body
