@@ -47,5 +47,5 @@ src_location: /usr/local/src
 pcre_version: '8.43'
 
 # Lua jit
-lua_jit_version: '2.0.5'
+lua_jit_version: 'v2.1-agentzh'
 lua_jit_install: /usr/local/luajit
