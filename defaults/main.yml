@@ -21,7 +21,6 @@ nginx_configure_arg: --http-client-body-temp-path=/tmp/nginx_client_body
   --without-http_uwsgi_module
   --with-http_stub_status_module
   --with-http_ssl_module
-  --with-http_spdy_module
   --with-http_v2_module
   --with-http_v2_hpack_enc
   --with-http_gzip_static_module
